@@ -1,23 +1,26 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 app = Flask(__name__)
 
 @app.route('/')
 def index():
   return render_template("index.html")
 
-@app.route('/create/')
+@app.route('/create/', methods=["POST", "GET"])
 def create():
-  pass
+  if request.method == "POST":
+    pass
 
-@app.route('/edit/')
+@app.route('/edit/', methods=["POST"])
 def edit():
-  pass
+  if request.method == "POST":
+    pass
 
-@app.route('/get/<int:dairyNumber>')
+@app.route('/get/<int:dairyNumber>', methods=["GET"])
 def get(dairyNumber):
-  pass
+  if request.method == "GET":
+    pass
 
-@app.route('/delete/')
+@app.route('/delete/', methods=["DELETE"])
 def delete():
   pass
 
