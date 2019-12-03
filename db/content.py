@@ -1,34 +1,35 @@
-#-*- coding:utf-8 -*-
+# -*- coding:utf-8 -*-
 
-from sqlalchemy import Column, Integer, String, Boolean, DateTime
+from sqlalchemy import Column, Integer, String, Boolean, DateTime, Text
 from .base import Base
 from datetime import datetime
 
-class content(Base):
-    __tablename__ = 'content'
 
-    id = Column(String(100), primary_key=True)
-    title = Column(String(100), unique=True)
-    content = Column(String(10000000))
-    date = Column(datetime)
+class diary(Base):
+    __tablename__ = 'diary'
 
+    id = Column(Integer, primary_key=True)
+    title = Column(String(100))
+    content = Column(Text)
+    create_date = Column(datetime)
+    update_date = Column(datetime)
 
-    def __init__(self, id, title, content, date):
+    def __init__(self, id, title, content, create_date, update_date):
         self.id = id
         self.title = title
         self.content = content
-        self.date = date
-
+        self.create_date = create_date
+        self.update_date = update_date
 
     def __repr__(self):
-        return (self.id + self.title + self.content + self.date)
+        return ("< Diary number: %d\n  title: %s\n  content: %s\n  create_date:%s\n  update_date:%s>" % (self.id, self.title, self.content, self.create_date, self.update_date))
 
     @property
     def serialize(self):
-       return {
-           "id": self.id,
-           "title": self.title,
-           "content": self.content,
-           "date": self.date,
-       }
-        
+        return {
+            "id": self.id,
+            "title": self.title,
+            "content": self.content,
+            "create_date": self.create_date,
+            "update_date": self.update_date
+        }
